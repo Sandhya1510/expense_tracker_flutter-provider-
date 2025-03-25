@@ -26,6 +26,7 @@
 // }
 
 
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/expense.dart';
@@ -55,28 +56,52 @@ class ExpenseItem extends StatelessWidget {
     return Card(
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       elevation: 4,
-      child: ListTile(
-        title: Text(expense.title),
-        subtitle: Text('Category: ${expense.category}'),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              icon: Icon(Icons.edit, color: Colors.blue),
-              onPressed: () => _editExpense(context),
+            //(Column for title, category, and amount)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Item: ${expense.title}',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  'Category: ${expense.category}',
+                  style: TextStyle(fontSize: 14, color: Colors.grey[800]),
+                ),
+                SizedBox(height: 4),
+                Container(
+                  padding: EdgeInsets.all(6.0),
+                  decoration: BoxDecoration(
+                    color: Colors.blueGrey[100],
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    'Cost: \$${expense.amount.toStringAsFixed(2)}',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
             ),
-            IconButton(
-              icon: Icon(Icons.delete, color: Colors.red),
-              onPressed: () => _deleteExpense(context),
+            //(Edit and delete buttons)
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.edit, color: Colors.blue),
+                  onPressed: () => _editExpense(context),
+                ),
+                IconButton(
+                  icon: Icon(Icons.delete, color: Colors.red),
+                  onPressed: () => _deleteExpense(context),
+                ),
+              ],
             ),
           ],
-        ),
-        leading: Cir(
-          backgroundColor: Colors.greenAccent,
-          child: Text(
-            '\$${expense.amount.toStringAsFixed(2)}',
-            style: TextStyle(fontSize: 10),
-          ),
         ),
       ),
     );

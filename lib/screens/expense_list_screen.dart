@@ -63,20 +63,19 @@ class ExpenseListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Expense Tracker'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => AddExpenseScreen()),
-              );
-            },
-          )
-        ],
       ),
       body: Column(
         children: [
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => AddExpenseScreen()),
+                );
+              },
+              child: Text("Add items")
+          ),
+          SizedBox(height: 4),
           CategoryFilter(),
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -85,6 +84,7 @@ class ExpenseListScreen extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
+          SizedBox(height: 4),
           Expanded(
             child: ListView.builder(
               itemCount: expenseProvider.expenses.length,
