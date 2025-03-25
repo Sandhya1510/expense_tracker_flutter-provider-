@@ -57,7 +57,7 @@ import '../providers/expense_provider.dart';
 class AddExpenseScreen extends StatelessWidget {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController amountController = TextEditingController();
-  String selectedCategory = "Food";
+  String selectedCategory = "Other";
 
   void saveExpense(BuildContext context) {
     final title = titleController.text;
@@ -83,7 +83,7 @@ class AddExpenseScreen extends StatelessWidget {
             TextField(controller: amountController, decoration: InputDecoration(labelText: 'Amount'), keyboardType: TextInputType.number),
             DropdownButton<String>(
               value: selectedCategory,
-              items: ["Food", "Travel", "Shopping"].map((category) {
+              items: ["Food", "Travel", "Shopping", "Other"].map((category) {
                 return DropdownMenuItem(value: category, child: Text(category));
               }).toList(),
               onChanged: (value) {
